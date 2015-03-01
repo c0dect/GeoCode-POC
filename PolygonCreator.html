@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polygon</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+// This example creates a simple polygon representing the Bermuda Triangle.
+
+function initialize() {
+
+  
+
+  var mapOptions = {
+    zoom: 15,
+    center: new google.maps.LatLng(45.625563, -122.574463),
+    mapTypeId: google.maps.MapTypeId.ROADMAP 
+  };
+
+  var bermudaTriangle;
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  // Define the LatLng coordinates for the polygon's path.
+
+  var json1 = [ [ -122.568970, 45.625563 ], [ -122.574463, 45.625563 ], [ -122.574463, 45.625563 ], [ -122.577149, 45.629405 ], [ -122.579956, 45.631412 ], [ -122.581238, 45.633245 ], [ -122.577209, 45.637087 ], [ -122.570887, 45.637087 ], [ -122.568970, 45.637835 ], [ -122.563421, 45.637113 ], [ -122.564329, 45.630623 ], [ -122.568588, 45.629405 ], [ -122.568970, 45.629296 ], [ -122.568970, 45.625563 ], [ -122.568970, 45.625563 ] ];
+
+  var zillowJson = [ [ -122.560830, 45.635017 ], [ -122.560726, 45.634760 ], [ -122.560395, 45.633793 ], [ -122.560282, 45.633252 ], [ -122.560186, 45.632837 ], [ -122.560032, 45.631882 ], [ -122.559985, 45.630906 ], [ -122.559834, 45.628239 ], [ -122.559754, 45.626988 ], [ -122.559731, 45.626426 ], [ -122.559696, 45.625363 ], [ -122.559512, 45.622569 ], [ -122.559501, 45.622230 ], [ -122.559497, 45.621863 ], [ -122.559483, 45.621616 ], [ -122.559460, 45.621425 ], [ -122.559403, 45.621157 ], [ -122.559397, 45.621116 ], [ -122.559380, 45.621046 ], [ -122.559489, 45.621042 ], [ -122.559589, 45.621043 ], [ -122.559700, 45.621039 ], [ -122.559788, 45.621039 ], [ -122.559951, 45.621039 ], [ -122.560111, 45.621035 ], [ -122.560238, 45.621035 ], [ -122.560738, 45.621039 ], [ -122.560993, 45.621039 ], [ -122.561132, 45.621039 ], [ -122.561385, 45.621046 ], [ -122.561637, 45.621053 ], [ -122.562048, 45.621046 ], [ -122.562290, 45.621038 ], [ -122.562428, 45.621038 ], [ -122.562595, 45.621037 ], [ -122.562800, 45.621036 ], [ -122.563427, 45.621030 ], [ -122.564490, 45.621018 ], [ -122.565368, 45.621016 ], [ -122.566779, 45.621008 ], [ -122.567916, 45.621005 ], [ -122.568015, 45.621005 ], [ -122.569269, 45.621002 ], [ -122.569932, 45.620999 ], [ -122.572090, 45.621012 ], [ -122.572846, 45.621018 ], [ -122.572938, 45.621030 ], [ -122.573107, 45.621051 ], [ -122.573276, 45.627876 ], [ -122.573454, 45.635024 ], [ -122.573301, 45.635023 ], [ -122.573226, 45.635022 ], [ -122.568733, 45.634981 ], [ -122.563114, 45.635366 ], [ -122.561193, 45.635054 ], [ -122.560830, 45.635017 ] ];
+
+  var myPolyJson = [[-122.5791015625, 45.6259765625], [-122.578125, 45.6259765625], [-122.578125, 45.6376953125], [-122.5791015625, 45.6376953125], [-122.5791015625, 45.6259765625]];
+
+ var qiPath = [];
+
+  for(var i = 0; i < json1.length; i++) {
+     qiPath.push(new google.maps.LatLng(json1[i][1], json1[i][0]));
+}
+
+
+var zillowPath = [];
+ 
+for(var i = 0; i < zillowJson.length; i++) {
+     zillowPath.push(new google.maps.LatLng(zillowJson[i][1], zillowJson[i][0]));
+}
+
+var newPoly = [];
+for(var i = 0; i < myPolyJson.length; i++) {
+     newPoly.push(new google.maps.LatLng(myPolyJson[i][1], myPolyJson[i][0]));
+}
+
+  var triangleCoords = [
+    new google.maps.LatLng(25.774252, -80.190262),
+    new google.maps.LatLng(18.466465, -66.118292),
+    new google.maps.LatLng(32.321384, -64.75737),
+    new google.maps.LatLng(25.774252, -80.190262)
+  ];
+
+  // Construct the polygon.
+  bermudaTriangle = new google.maps.Polygon({
+    paths: qiPath,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+  bermudaTriangle.setMap(map);
+
+var zillowMap;
+
+  zillowMap = new google.maps.Polygon({
+    paths: zillowPath,
+    strokeColor: '#00FF00',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#00FF00',
+    fillOpacity: 0.35
+  });
+
+  zillowMap.setMap(map);
+
+
+  var myPolygon;
+myPolygon = new google.maps.Polygon({
+    paths: newPoly,
+    strokeColor: '#0000FF',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#0000FF',
+    fillOpacity: 0.35
+  });
+
+myPolygon.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
