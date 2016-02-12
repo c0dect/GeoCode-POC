@@ -8,7 +8,7 @@ namespace GeoCodeHandler
 {
     internal static class Constants
     {
-        public static string APIKey = "AIzaSyCSfoAREd1e6a-WLOoYFHiV5W3majI1q7I";
+        public static string APIKey = "";
         public static int Width = 1;
         public static int StepSize = 2;
     }
